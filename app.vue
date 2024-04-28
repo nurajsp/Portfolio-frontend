@@ -6,6 +6,6 @@
 
 <script setup>
 
-  const name="Nuraj Perera"
+  const name="Nipun"
 
 </script>
