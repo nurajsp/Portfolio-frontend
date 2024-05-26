@@ -24,6 +24,46 @@
     </ul>
   </div>
 
+  //create a new project
+  <div>
+    <h2>Create a new project</h2>
+    <form @submit.prevent="createProject">
+      
+      <label for="name">Name</label>
+      <input type="text" v-model="newProject.name" placeholder="Name" />
+      
+      <label for="description">Description</label>
+      <input type="text" v-model="newProject.description" placeholder="Description" />
+      <button type="submit">Create Project</button>
+    </form>
+  </div>
+
+  //create a patch request
+  <div>
+    <h2>Update a project</h2>
+    <form @submit.prevent="updateProject">
+      
+      <label for="name">Name</label>
+      <input type="text" v-model="updateProject.name" placeholder="Name" />
+      
+      <label for="description">Description</label>
+      <input type="text" v-model="updateProject.description" placeholder="Description" />
+      <button type="submit">Update Project</button>
+    </form>
+  </div>
+
+  //create a delete request
+  <div>
+    <h2>Delete a project</h2>
+    <form @submit.prevent="deleteProject">
+      
+      <label for="name">Name</label>
+      <input type="text" v-model="deleteProject.name" placeholder="Name" />
+      
+      <button type="submit">Delete Project</button>
+    </form>
+  </div>
+
 </template>
 
 <script setup>
