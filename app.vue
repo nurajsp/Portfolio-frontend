@@ -1,152 +1,56 @@
 <template>
-  
-<h1>{{name}}</h1>
-  <div class="container">
-    <div class="row">
-      <div class="col">
-        <h2>Projects</h2>
-        <div v-if="pending1">Loading...</div>
-        <ul>
-          <li v-for="project in projects" :key="project.name">
-            <h2>{{project.name}}</h2>
-            <p>{{project.description}}</p>
-          </li>
-        </ul>
-      </div>
 
-      <div class="col">
-        <h2>Blogs</h2>
-        <div v-if="pending2">Loading...</div>
-        <ul>
-          <li v-for="blog in blogs" :key="blog.title">
-            <h2>{{blog.title}}</h2>
-            <p>{{blog.content}}</p>
-          </li>
-        </ul>
-      </div>
-
-    </div>
-  </div>
-  
-
-     <!--form to create projects-->
-
-  <div class="container">
-    <div class="row">
-      <div class="col">
-       
+  <div id="header">
+    <div class="container">
       
-        <h2>Create Project</h2>
-        <form @submit.prevent="createProject">
-          <div class="mb-3">
-            <label for="projectName" class="form-label">Project Name</label>
-            <input type="text" class="form-control" id="projectName" v-model="newProject.name">
-          </div>
-          
-          <div class="mb-3">
-            <label for="projectDescription" class="form-label">Project Description</label>
-            <textarea class="form-control" id="projectDescription" v-model="newProject.description"></textarea>
-          </div>
-          <button type="submit" class="btn btn-primary">Create Project</button>
-        </form>
-      </div>
-    </div>
-  </div>
-  <br>
-
-
-  <!--form to update projects by id-->
- <!--form to create projects-->
-
-  <div class="container">
-    <div class="row">
-      <div class="col">
-       
-      
-        <h2>Update Project</h2>
-          <form @submit.prevent="updateProject">
-                     <select class="form-select mb-3" id="updateProjectId" v-model="newupdateProject._id">
-              <option value="" selected disabled>Select the project name</option>
-              <option v-for="project in projects" :value="project._id">{{ project.name }}</option>
-            </select>
-          <div class="mb-3">
-            <label for="updateProjectName" class="form-label">New Project Name</label>
-            <input type="text" class="form-control" id="updateProjectName" v-model="newupdateProject.name">
-          </div>
-          <div class="mb-3">
-            <label for="updateProjectDescription" class="form-label">New Project Description</label>
-            <textarea class="form-control" id="updateProjectDescription" v-model="newupdateProject.description"></textarea>
-          </div>
-          <div>
-            <button type="submit" class="btn btn-primary">Update Project</button>
-          </div>
-        
-        </form>
-      </div>
-    </div>
-  </div>
-  <br>
-
-  
-
-  <!--form to delete projects using the id-->
- 
-
-  <div class="container">
-    <div class="row">
-      <div class="col">
-      
-        <h2>Delete Project</h2>
-        <form @submit.prevent="deleteProject">
-          <div class="mb-3">
-            <label for="deleteProjectId" class="form-label">Project ID</label>
-            <select class="form-select" id="deleteProjectId" v-model="deleteProjectId">
-              <option value="" selected disabled>Select the project name</option>
-              <option v-for="project in projects" :value="project._id">{{ project.name }}</option>
-            </select>
-          </div>
-          <button type="submit" class="btn btn-primary">Delete Project</button>
-        </form>
-      </div>
     </div>
   </div>
 
-<br>
-
-
-  <div class="container">
-    <div class="row">
-      <div class="col">
-        <h2>Update Project</h2>
-        <form @submit.prevent="updateProject">
-          <div class="mb-3">
-            <label for="newProjectName" class="form-label">Project Name</label>
-            <input type="text" class="form-control" id="newProjectName" v-model="newProject.name">
-          </div>
-          <div class="mb-3">
-            <label for="newProjectDescription" class="form-label">Project Description</label>
-            <textarea class="form-control" id="newProjectDescription" v-model="newProject.description"></textarea>
-          </div>
-          <button type="submit" class="btn btn-primary">Update Project</button>
-        </form>
-      </div>
-    </div>
+   <div class="background">
+    <!-- Your page content -->
+    <h1>Nuraj Perera</h1>
   </div>
+</template>
 
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', sans-serif;
+  box-sizing: border-box;
+}
 
+body {
+  background-color: #080808;
+  color: #fff;
+}
 
-
-  </template>
+.background {
+  background-image: url('backgroundme.jpg'); /* Image from static folder */
+  background-size: cover; /* Ensures the image covers the entire area */
+  background-position: center;
+  height: 90vh; /* Set the height of the element */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+</style>
 
 <script setup>
-
 useHead({
   title: 'My Portfolio',
   link: [
     { 
       rel: 'stylesheet', 
-      href: 'https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css',
+      href: 'https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css',
       integrity: 'sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC',
+      crossorigin: 'anonymous'
+    }
+  ],
+  script: [
+    {
+      src: 'https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js',
+      integrity: 'sha384-MrcW6ZMFyC0EP6KH8U2n1ZKz2AKN8KK3EVH1a1kE/nMNpjx0I8pcja6N6a9f6Q5',
       crossorigin: 'anonymous'
     }
   ]
@@ -164,8 +68,6 @@ const newProject = ref({
 
 // Function to create projects 
 const createProject = async () => {
-  console.log(newProject.value);
-
   try {
     const response = await fetch('http://localhost:8080/projects', {
       method: 'POST',
@@ -180,8 +82,6 @@ const createProject = async () => {
     }
 
     const result = await response.json();
-
-    // Adding new project to the list of projects without refreshing the page
     projects.value.push(result);
 
     // Resetting the form
@@ -201,8 +101,6 @@ const newupdateProject = ref({
 
 // Function to update projects
 const updateProject = async () => {
-  console.log(newupdateProject.value);
-
   try {
     const response = await fetch(`http://localhost:8080/projects/${newupdateProject.value._id}`, {
       method: 'PATCH',
@@ -219,7 +117,6 @@ const updateProject = async () => {
       throw new Error('Failed to update project');
     }
 
-    // Update the project without refreshing the page
     const updatedProject = await response.json();
 
     const index = projects.value.findIndex(project => project._id === updatedProject._id);
@@ -241,7 +138,6 @@ const deleteProjectId = ref('');
 
 // Function to delete projects
 const deleteProject = async () => {
-  console.log(deleteProjectId.value);
   try {
     const response = await fetch(`http://localhost:8080/projects/${deleteProjectId.value}`, {
       method: 'DELETE'
@@ -249,7 +145,6 @@ const deleteProject = async () => {
     if (!response.ok) {
       throw new Error('Failed to delete project');
     }
-    // Removing the project from the list of projects
     projects.value = projects.value.filter(project => project._id !== deleteProjectId.value);
 
     // Resetting the form
@@ -258,41 +153,4 @@ const deleteProject = async () => {
     console.error("Error", error);
   }
 };
-
-
-    
-      
 </script>
-
-
-<style>
-  body {
-    margin: 0;
-    padding: 0;
-    font-family: Arial, sans-serif;
-  }
-
-  .container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
-  }
-
-  .row {
-    display: flex;
-    flex-wrap: wrap;
-  }
-
-  .col {
-    flex: 1;
-    padding: 10px;
-  }
-
-  .dropdown {
-    margin-top: 20px;
-  }
-
-  .dropdown-toggle {
-    width: 100%;
-  }
-</style>
